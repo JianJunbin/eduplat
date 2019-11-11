@@ -1,6 +1,5 @@
 package com.team05.eduplat.service;
 
-import com.team05.eduplat.controller.param.CategoryParam;
 import com.team05.eduplat.entity.po.CategoryPo;
 import com.team05.eduplat.entity.vo.CategoryVo;
 import com.team05.eduplat.entity.vo.PageinfoVo;
@@ -29,8 +28,8 @@ import java.util.List;
 public class CategoryService {
     @Autowired
     CategoryDao categoryDao;
-    public ResultMessage pageCategory(CategoryParam categoryParam) {
-        PageinfoVo pageinfoVo = categoryParam.getPageinfoVo();
+    public ResultMessage pageCategory(PageinfoVo pageinfoVo) {
+       // PageinfoVo pageinfoVo = categoryParam.getPageinfoVo();
 
         Page<CategoryPo> categoryPos ;
         categoryPos = categoryDao.findAll(PageHelper.initPage(pageinfoVo));
@@ -40,9 +39,9 @@ public class CategoryService {
             BeanUtils.copyProperties(e,categoryVo);
             categoryVos.add(categoryVo);
         });
-
-
         return ResultHelper.result(ResultEnum.SUCCESS)
                 .put("category", categoryVos);
     }
+
+
 }
