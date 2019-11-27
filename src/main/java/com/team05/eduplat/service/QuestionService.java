@@ -30,6 +30,7 @@ public class QuestionService {
     @Autowired
     QuestionDao questionDao;
 
+    //题目列表
     public ResultMessage ListQuestion(PageinfoVo pageinfoVo){
         Page<QuestionPo> questionPos=questionDao.findAll(PageHelper.initPage(pageinfoVo));
         List<QuestionVo> questionVos=new LinkedList<>();
@@ -45,5 +46,34 @@ public class QuestionService {
 //        }
         return ResultHelper.result(ResultEnum.SUCCESS)
                 .put("question",questionVos);
+    }
+
+
+    public ResultMessage UpdateQuestion(QuestionPo questionPo){
+        questionDao.saveAndFlush(questionPo);
+        long id=questionPo.getId();
+        System.out.println("修改题目id:"+id);
+        return ResultHelper.result(ResultEnum.SUCCESS)
+                .put("questionID",id);
+    }
+
+    public ResultMessage AddQuestion(QuestionPo questionPo){
+        questionDao.saveAndFlush(questionPo);
+        long id=questionPo.getId();
+        System.out.println("添加题目id:"+id);
+        return ResultHelper.result(ResultEnum.SUCCESS)
+                .put("questionID",id);
+    }
+
+    public ResultMessage DeleteQuestion(long id){
+        questionDao.deleteQuestion(id);
+        return ResultHelper.result(ResultEnum.SUCCESS)
+                .put("questionID",id);
+    }
+
+    public ResultMessage RecoverQuestion(long id){
+        questionDao.recoverQuestion(id);
+        return ResultHelper.result(ResultEnum.SUCCESS)
+                .put("questionID",id);
     }
 }

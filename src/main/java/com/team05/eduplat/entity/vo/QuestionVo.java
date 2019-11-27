@@ -19,9 +19,10 @@ public class QuestionVo {
     private String option4;
     private String answer;
     private String q_description;
-    private int tag1;
-    private int tag2;
-    private int tag3;
+    private String tag1;
+    private String tag2;
+    private String tag3;
     private long user_id;
     private long course_id;
+    private int isdelete;
 }

@@ -1,7 +1,6 @@
 package com.team05.eduplat.entity.po;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 /**
  * @program: eduplat
@@ -39,17 +38,20 @@ public class QuestionPo {
     private String q_description;
 
     @Column(name = "question_tag1")
-    private  int tag1;
+    private  String tag1;
     @Column(name = "question_tag2")
-    private  int tag2;
+    private  String tag2;
     @Column(name = "question_tag3")
-    private  int tag3;
+    private  String tag3;
 
     @Column(name = "user_id")
     private long user_id;
 
     @Column(name = "course_id")
     private long course_id;
+
+    @Column(name = "isdelete")
+    private int isdelete;
 
     public long getId() {
         return id;
@@ -123,27 +125,27 @@ public class QuestionPo {
         this.q_description = q_description;
     }
 
-    public int getTag1() {
+    public String getTag1() {
         return tag1;
     }
 
-    public void setTag1(int tag1) {
+    public void setTag1(String tag1) {
         this.tag1 = tag1;
     }
 
-    public int getTag2() {
+    public String getTag2() {
         return tag2;
     }
 
-    public void setTag2(int tag2) {
+    public void setTag2(String tag2) {
         this.tag2 = tag2;
     }
 
-    public int getTag3() {
+    public String getTag3() {
         return tag3;
     }
 
-    public void setTag3(int tag3) {
+    public void setTag3(String tag3) {
         this.tag3 = tag3;
     }
 
@@ -161,5 +163,13 @@ public class QuestionPo {
 
     public void setCourse_id(long course_id) {
         this.course_id = course_id;
+    }
+
+    public int getIsdelete() {
+        return isdelete;
+    }
+
+    public void setIsdelete(int isdelete) {
+        this.isdelete = isdelete;
     }
 }
