@@ -1,6 +1,8 @@
 package com.team05.eduplat.repository;
 
 import com.team05.eduplat.entity.po.CategoryPo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -11,4 +13,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @Date 2019-11-6 9:53
  **/
 public interface CategoryDao extends JpaRepository<CategoryPo,Integer> {
+    @Override
+    Page<CategoryPo> findAll(Pageable pageable);
+
 }
