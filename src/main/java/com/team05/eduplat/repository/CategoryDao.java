@@ -15,4 +15,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface CategoryDao extends JpaRepository<CategoryPo,Integer> {
     @Override
     Page<CategoryPo> findAll(Pageable pageable);
+
 }
