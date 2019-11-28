@@ -3,17 +3,24 @@ package com.team05.eduplat.service;
 import com.team05.eduplat.controller.param.NewListParam;
 import com.team05.eduplat.entity.po.CourseListPo;
 import com.team05.eduplat.entity.po.CoursePo;
+import com.team05.eduplat.entity.vo.CourseListVo;
 import com.team05.eduplat.entity.vo.CourseVo;
+import com.team05.eduplat.entity.vo.PageinfoVo;
 import com.team05.eduplat.repository.CourseDao;
 import com.team05.eduplat.repository.CourseListDao;
+import com.team05.eduplat.utils.PageHelper;
 import com.team05.eduplat.utils.Result.ResultEnum;
 import com.team05.eduplat.utils.Result.ResultHelper;
 import com.team05.eduplat.utils.Result.ResultMessage;
 import net.sf.json.JSONArray;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @program: EduPlat
@@ -74,6 +81,23 @@ public class CourseService {
         return ResultHelper.result(ResultEnum.SUCCESS);
     }
 
+    /*查找课程目录*/
+    public ResultMessage findList(Long courseId){
+        List<CourseListPo> courseListPos;
+        courseListPos = courseListDao.findByCourseId(courseId);
+        List<CourseListVo> courseListVos = new LinkedList<>();
+        courseListPos.forEach(e->{
+            CourseListVo courseListVo = new CourseListVo();
+            courseListVo.setListId(e.getListId());
+            courseListVo.setCourseId(e.getCourseId());
+            courseListVo.setId(e.getNodeId());
+            courseListVo.setName(e.getNodeName());
+            courseListVo.setPid(e.getPid());
+            courseListVos.add(courseListVo);
+        });
+        return ResultHelper.result(ResultEnum.SUCCESS).put("treeData",courseListVos);
+    }
+
     /*创建课程，CourseVo为页面传入的课程实体类，BeanUtils转换后存入数据库*/
     public ResultMessage createCourse(CourseVo courseVo){
         CoursePo coursePo = new CoursePo();
@@ -82,4 +106,19 @@ public class CourseService {
         return ResultHelper.result(ResultEnum.SUCCESS)
                 .put("courseId",coursePo.getCourseId());
     }
+
+    public ResultMessage pageCourse(PageinfoVo pageinfoVo){
+        Page<CoursePo> coursePos;
+        coursePos = courseDao.findByUserId(PageHelper.initPage(pageinfoVo),pageinfoVo.getUserId());
+        List<CourseVo> courseVos = new LinkedList<>();
+        coursePos.forEach(e->{
+            CourseVo courseVo = new CourseVo();
+            BeanUtils.copyProperties(e,courseVo);
+            courseVos.add(courseVo);
+        });
+        return ResultHelper.result(ResultEnum.SUCCESS)
+                .put("courseVos",courseVos);
+    }
+
+
 }
