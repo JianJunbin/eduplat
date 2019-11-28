@@ -26,7 +26,7 @@ public class CategoryService {
     @Autowired
     CategoryDao categoryDao;
     public ResultMessage findAll() {
-        List<CategoryVo> categoryVos = new LinkedList<>();
+        List<CategoryVo> categoryVos = new LinkedList<CategoryVo>();
         List<CategoryPo> categoriePos = categoryDao.findAll();
         categoriePos.forEach(e -> {
             CategoryVo categoryVo = new CategoryVo();
