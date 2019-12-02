@@ -1,13 +1,16 @@
 package com.team05.eduplat.service;
 
 import com.team05.eduplat.controller.param.NewListParam;
+import com.team05.eduplat.controller.param.OrderParam;
 import com.team05.eduplat.entity.po.CourseListPo;
+import com.team05.eduplat.entity.po.CourseOrderPo;
 import com.team05.eduplat.entity.po.CoursePo;
 import com.team05.eduplat.entity.vo.CourseListVo;
 import com.team05.eduplat.entity.vo.CourseVo;
 import com.team05.eduplat.entity.vo.PageinfoVo;
 import com.team05.eduplat.repository.CourseDao;
 import com.team05.eduplat.repository.CourseListDao;
+import com.team05.eduplat.repository.CourseOrderDao;
 import com.team05.eduplat.utils.PageHelper;
 import com.team05.eduplat.utils.Result.ResultEnum;
 import com.team05.eduplat.utils.Result.ResultHelper;
@@ -35,6 +38,8 @@ public class CourseService {
     CourseListDao courseListDao;
     @Autowired
     CourseDao courseDao;
+    @Autowired
+    CourseOrderDao courseOrderDao;
     /*创建课程目录，NewListParam为页面传入的目录数据，遍历循环转换成courselistPo并存入数据库*/
     public ResultMessage createList(NewListParam newListParam){
         String nodeName;
@@ -81,6 +86,22 @@ public class CourseService {
         return ResultHelper.result(ResultEnum.SUCCESS);
     }
 
+    /*根据用户id和课程状态查找正在学习的课程*/
+    public ResultMessage findLearningCourse(OrderParam orderParam){
+        Long param_id = orderParam.getUserId();
+        int param_status = orderParam.getStatus();
+        List<CourseOrderPo> courseOrderPos;
+        courseOrderPos = courseOrderDao.findByUserIdAndStatus(param_id,param_status);
+        List<CourseVo> courseVos = new LinkedList<>();
+        courseOrderPos.forEach(e->{
+            CoursePo coursePo = courseDao.findByCourseId(e.getCourseId());
+            CourseVo courseVo = new CourseVo();
+            BeanUtils.copyProperties(coursePo,courseVo);
+            courseVos.add(courseVo);
+        });
+        return ResultHelper.result(ResultEnum.SUCCESS)
+                .put("courseVos",courseVos);
+    }
     /*查找课程目录*/
     public ResultMessage findList(Long courseId){
         List<CourseListPo> courseListPos;
@@ -120,5 +141,14 @@ public class CourseService {
                 .put("courseVos",courseVos);
     }
 
+    public ResultMessage deleteList(Long courseId){
+        courseListDao.deleteAllByCourseId(courseId);
+        return ResultHelper.result(ResultEnum.SUCCESS);
+    }
+
+    public ResultMessage deleteCourse(Long courseId){
+        courseDao.deleteByCourseId(courseId);
+        return ResultHelper.result(ResultEnum.SUCCESS);
+    }
 
 }
