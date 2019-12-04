@@ -30,5 +30,4 @@ public class CategoryController {
         if (resultMessage != null) return resultMessage;
         return categoryService.pageCategory(categoryParam);
     }
-
 }
