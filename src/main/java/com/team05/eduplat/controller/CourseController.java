@@ -1,7 +1,9 @@
 package com.team05.eduplat.controller;
 
 import com.team05.eduplat.controller.param.NewListParam;
+import com.team05.eduplat.controller.param.OrderParam;
 import com.team05.eduplat.entity.vo.CourseVo;
+import com.team05.eduplat.entity.vo.PageinfoVo;
 import com.team05.eduplat.service.CourseService;
 import com.team05.eduplat.utils.Result.ParamCheckUtil;
 import com.team05.eduplat.utils.Result.ResultMessage;
@@ -41,5 +43,43 @@ public class CourseController {
         return courseService.createList(newListParam);
     }
 
+    @ApiOperation("分页查询课程")
+    @PostMapping("/pageCourse")
+    public ResultMessage pageCourse(@RequestBody @Validated PageinfoVo pageinfoVo,BindingResult errors) throws Exception{
+        ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
+        if(resultMessage != null) return resultMessage;
+        return  courseService.pageCourse(pageinfoVo);
+    }
+
+    @ApiOperation("学生在学课程")
+    @PostMapping("/onCourse")
+    public ResultMessage onCourse(@RequestBody @Validated OrderParam orderParam,BindingResult errors) throws Exception{
+        ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
+        if (resultMessage != null) return resultMessage;
+        return courseService.findLearningCourse(orderParam);
+    }
+
+    @ApiOperation("课程目录查询")
+    @PostMapping("/findList")
+    public ResultMessage findList(@RequestBody @Validated Long courseId,BindingResult errors) throws Exception{
+        ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
+        if(resultMessage != null) return resultMessage;
+        return courseService.findList(courseId);
+    }
+
+    @ApiOperation("删除目录")
+    @PostMapping("deleteList")
+    public ResultMessage delList(@RequestBody @Validated Long courseId,BindingResult errors) throws Exception{
+        ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
+        if(resultMessage != null) return resultMessage;
+        return courseService.deleteList(courseId);
+    }
+    @ApiOperation("删除课程")
+    @PostMapping("deleteCourse")
+    public ResultMessage delCourse(@RequestBody @Validated Long courseId,BindingResult errors) throws Exception{
+        ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
+        if(resultMessage != null) return resultMessage;
+        return courseService.deleteCourse(courseId);
+    }
 
 }
