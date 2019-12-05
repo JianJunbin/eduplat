@@ -14,7 +14,7 @@ public class QuestionPo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "question_id")
-    private long id;
+    private Long id;
 
     @Column(name = "question_type")
     private int type;
@@ -48,7 +48,7 @@ public class QuestionPo {
     private long user_id;
 
     @Column(name = "course_id")
-    private long course_id;
+    private Long course_id;
 
     @Column(name = "isdelete")
     private int isdelete;

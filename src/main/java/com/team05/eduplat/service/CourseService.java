@@ -102,6 +102,15 @@ public class CourseService {
         return ResultHelper.result(ResultEnum.SUCCESS)
                 .put("courseVos",courseVos);
     }
+
+    /*根据课程id查找课程*/
+    public ResultMessage findCourseById(Long courseId){
+        CoursePo coursePo = new CoursePo();
+        coursePo = courseDao.findByCourseId(courseId);
+        return ResultHelper.result(ResultEnum.SUCCESS)
+                .put("coursePo",coursePo);
+    }
+
     /*查找课程目录*/
     public ResultMessage findList(Long courseId){
         List<CourseListPo> courseListPos;

@@ -12,7 +12,10 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @program: EduPlat
@@ -57,6 +60,14 @@ public class CourseController {
         ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
         if (resultMessage != null) return resultMessage;
         return courseService.findLearningCourse(orderParam);
+    }
+
+    @ApiOperation("根据课程id找课程")
+    @PostMapping("/courseById")
+    public ResultMessage courseById(@RequestBody @Validated Long courseId, BindingResult errors)throws Exception{
+        ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
+        if (resultMessage != null) return resultMessage;
+        return courseService.findCourseById(courseId);
     }
 
     @ApiOperation("课程目录查询")
