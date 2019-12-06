@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 /**
@@ -21,4 +21,8 @@ public interface CourseListDao extends JpaRepository<CourseListPo,Integer> {
     @Modifying
     @Transactional
     void deleteAllByCourseId(Long courseId);
+
+    @Query(value = "select node_name from course_list where course_id=:course_id and node_id=:node_id",nativeQuery = true)
+    String getNodeName(@Param(value = "course_id")Long course_id, @Param(value = "node_id")Long node_id);
+
 }
