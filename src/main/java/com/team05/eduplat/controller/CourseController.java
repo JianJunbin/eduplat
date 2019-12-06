@@ -58,4 +58,17 @@ public class CourseController {
         return courseService.findList(courseId);
     }
 
+    /**
+    * @Description: 试卷添加需要获取当前用户所添加的课程id以及name
+    * @Author: Jing
+    * @Date: 2019/11/29
+    */
+    @ApiOperation("用户id查课程")
+    @PostMapping("/getCourse")
+    public ResultMessage getCourse(@RequestBody @Validated PageinfoVo pageinfoVo,BindingResult errors) throws Exception{
+        ResultMessage resultMessage =ParamCheckUtil.checkParam(errors);
+        if (resultMessage !=null)return resultMessage;
+        return courseService.getCourse(pageinfoVo);
+    }
+
 }
