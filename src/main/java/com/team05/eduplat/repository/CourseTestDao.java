@@ -18,15 +18,23 @@ public interface CourseTestDao extends JpaRepository<CourseTestPo,Integer> {
 //    @Override
 //    Page<CourseTestPo> findAll(Pageable pageable);
 
+
+    @Query(value = "select * from course_test where course_id=:course_id",nativeQuery = true)
+    List<CourseTestPo> findAllByCourse_id(@Param(value = "course_id")Long course_id);
+
+    @Query(value = "select * from course_test where course_id=:course_id and chapter=:chapter and section=:section",nativeQuery = true)
+    CourseTestPo findTest(@Param(value = "course_id")Long course_id,@Param(value = "chapter")Long chapter
+            ,@Param(value = "section")Long section);
+
     @Modifying
-    @Query(value = "select * from course_test where user_id=:user_id",nativeQuery = true)
-    List<CourseTestPo> findAllByUser_id(@Param(value = "user_id")long user_id);
+    @Query(value = "update course_test set question_num=:question_num where test_id=:test_id",nativeQuery = true)
+    void editTest(@Param(value = "test_id")Long test_id,@Param(value = "question_num")int question_num);
 
     @Modifying
     @Query(value = "update course_test set isdelete=1 where test_id=:id",nativeQuery=true)
-    void deleteTest(@Param(value = "id") long id);
+    void deleteTest(@Param(value = "id") Long id);
 
     @Modifying
     @Query(value = "update course_test set isdelete=0 where test_id=:id",nativeQuery=true)
-    void recoverTest(@Param(value = "id")long id);
+    void recoverTest(@Param(value = "id")Long id);
 }

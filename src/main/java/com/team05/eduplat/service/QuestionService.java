@@ -30,7 +30,13 @@ public class QuestionService {
     @Autowired
     QuestionDao questionDao;
 
-    //题目列表
+    /**
+    * @Description: 分页查询所有题目
+    * @Param:  分页查询请求体
+    * @return:  查询成功，返回查询结果
+    * @Author: Jing
+    * @Date: 2019/12/3
+    */
     public ResultMessage ListQuestion(PageinfoVo pageinfoVo){
         Page<QuestionPo> questionPos=questionDao.findAll(PageHelper.initPage(pageinfoVo));
         List<QuestionVo> questionVos=new LinkedList<>();
@@ -39,39 +45,61 @@ public class QuestionService {
             BeanUtils.copyProperties(q,questionVo);
             questionVos.add(questionVo);
         });
-//        for (QuestionPo q : questionPos){
-//            QuestionVo questionVo=new QuestionVo();
-//            BeanUtils.copyProperties(q,questionVo);
-//            questionVos.add(questionVo);
-//        }
         return ResultHelper.result(ResultEnum.SUCCESS)
                 .put("question",questionVos);
     }
 
-
+    /**
+    * @Description:  修改题目
+    * @Param:  传入要修改的题目实体
+    * @return:  修改成功，返回说修改的id
+    * @Author: Jing
+    * @Date: 2019/12/3
+    */
     public ResultMessage UpdateQuestion(QuestionPo questionPo){
         questionDao.saveAndFlush(questionPo);
-        long id=questionPo.getId();
+        Long id=questionPo.getId();
         System.out.println("修改题目id:"+id);
         return ResultHelper.result(ResultEnum.SUCCESS)
                 .put("questionID",id);
     }
 
+    /**
+    * @Description:  添加题目
+    * @Param:  传入题目实体对象
+    * @return:  添加成功，返回所添加题目id
+    * @Author: Jing
+    * @Date: 2019/12/3
+    */
     public ResultMessage AddQuestion(QuestionPo questionPo){
         questionDao.saveAndFlush(questionPo);
-        long id=questionPo.getId();
+        Long id=questionPo.getId();
         System.out.println("添加题目id:"+id);
         return ResultHelper.result(ResultEnum.SUCCESS)
                 .put("questionID",id);
     }
 
-    public ResultMessage DeleteQuestion(long id){
+    /**
+    * @Description:  题目状态逻辑删除
+    * @Param:  传入要删除的题目id
+    * @return:  删除成功，返回题目id
+    * @Author: Jing
+    * @Date: 2019/12/3
+    */
+    public ResultMessage DeleteQuestion(Long id){
         questionDao.deleteQuestion(id);
         return ResultHelper.result(ResultEnum.SUCCESS)
                 .put("questionID",id);
     }
 
-    public ResultMessage RecoverQuestion(long id){
+    /**
+    * @Description: 题目状态逻辑恢复
+    * @Param:  传入要恢复题目id
+    * @return:  恢复成功，返回题目id
+    * @Author: Jing
+    * @Date: 2019/12/3
+    */
+    public ResultMessage RecoverQuestion(Long id){
         questionDao.recoverQuestion(id);
         return ResultHelper.result(ResultEnum.SUCCESS)
                 .put("questionID",id);
