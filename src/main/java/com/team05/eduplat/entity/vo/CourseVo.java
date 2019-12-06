@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 @Data
 public class CourseVo {
 
+    private Long courseId;
     @NotNull(message = "名字不能为空")
     private String name;
     private BigDecimal price;
