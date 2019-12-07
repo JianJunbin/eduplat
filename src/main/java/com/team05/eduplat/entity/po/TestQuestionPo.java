@@ -14,38 +14,38 @@ public class TestQuestionPo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "test_id")
-    private long test_id;
+    private Long test_id;
 
     @Column(name = "question_id")
-    private long question_id;
+    private Long question_id;
 
 //    @Column(name = "isdelete")
 //    private int isdelete;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public long getTest_id() {
+    public Long getTest_id() {
         return test_id;
     }
 
-    public void setTest_id(long test_id) {
+    public void setTest_id(Long test_id) {
         this.test_id = test_id;
     }
 
-    public long getQuestion_id() {
+    public Long getQuestion_id() {
         return question_id;
     }
 
-    public void setQuestion_id(long question_id) {
+    public void setQuestion_id(Long question_id) {
         this.question_id = question_id;
     }
 

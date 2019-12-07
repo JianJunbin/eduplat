@@ -16,12 +16,15 @@ public interface QuestionDao extends JpaRepository<QuestionPo,Integer> {
     @Override
     Page<QuestionPo> findAll(Pageable pageable);
 
+    QuestionPo findById(Long question_id);
+
     @Modifying
     @Query(value = "update questions set isdelete=1 where question_id=:id",nativeQuery=true)
-    void deleteQuestion(@Param(value = "id") long id);
+    void deleteQuestion(@Param(value = "id") Long id);
+
 
     @Modifying
     @Query(value = "update questions set isdelete=0 where question_id=:id",nativeQuery=true)
-    void recoverQuestion(@Param(value = "id")long id);
+    void recoverQuestion(@Param(value = "id")Long id);
 
 }

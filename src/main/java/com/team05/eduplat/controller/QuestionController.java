@@ -32,7 +32,7 @@ public class QuestionController {
     @PostMapping("/list")
     public ResultMessage list(@RequestBody @Validated PageinfoVo pageinfoVo
             , BindingResult errors)throws Exception{
-        ResultMessage resultMessage= ParamCheckUtil.checkParam(errors);
+        ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
         if (resultMessage != null) return resultMessage;
         System.out.print(pageinfoVo.getIndexPageNum());
         return questionService.ListQuestion(pageinfoVo);
@@ -41,7 +41,7 @@ public class QuestionController {
     @ApiOperation("题目修改")
     @PostMapping("/edit")
     public ResultMessage edit(@RequestBody QuestionPo questionPo,BindingResult errors)throws Exception{
-        ResultMessage resultMessage= ParamCheckUtil.checkParam(errors);
+        ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
         if (resultMessage != null) return resultMessage;
         return questionService.UpdateQuestion(questionPo);
     }
@@ -49,24 +49,24 @@ public class QuestionController {
     @ApiOperation("添加题目")
     @PostMapping("/add")
     public ResultMessage add(@RequestBody QuestionPo questionPo,BindingResult errors)throws Exception{
-        ResultMessage resultMessage= ParamCheckUtil.checkParam(errors);
-        if (resultMessage!=null) return resultMessage;
+        ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
+        if (resultMessage != null) return resultMessage;
         return questionService.AddQuestion(questionPo);
     }
 
     @ApiOperation("删除题目")
     @PostMapping("/delete")
-    public ResultMessage delete(@RequestBody long id,BindingResult errors)throws Exception{
-        ResultMessage resultMessage=ParamCheckUtil.checkParam(errors);
-        if (resultMessage!=null) return resultMessage;
+    public ResultMessage delete(@RequestBody Long id,BindingResult errors)throws Exception{
+        ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
+        if (resultMessage != null) return resultMessage;
         return questionService.DeleteQuestion(id);
     }
 
     @ApiOperation("恢复题目")
     @PostMapping("/recover")
-    public ResultMessage recover(@RequestBody long id,BindingResult errors)throws Exception{
-        ResultMessage resultMessage=ParamCheckUtil.checkParam(errors);
-        if (resultMessage!=null) return resultMessage;
+    public ResultMessage recover(@RequestBody Long id,BindingResult errors)throws Exception{
+        ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
+        if (resultMessage != null) return resultMessage;
         return questionService.RecoverQuestion(id);
     }
 }
