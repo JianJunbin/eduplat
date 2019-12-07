@@ -105,11 +105,19 @@ public class VideoController {
             vvo.setUrl(url);
 //            vvo.setUid(0);
 //            vvo.setName("你这是在测试吗");
-            videoAdd(vvo);
+            VideoAdd(vvo);
         }
     }
 
-    public  void videoAdd(VideoVo vvo){
+    @ApiOperation("视频获取")
+    @GetMapping("get")
+    public ResultMessage VideoGet(int userId) throws Exception{
+       return videoService.findAll(userId);
+    }
+
+    @ApiOperation("视频修改/添加")
+    @GetMapping("update")
+    public  void VideoAdd(VideoVo vvo){
         videoService.add(vvo);
         return;
     }
