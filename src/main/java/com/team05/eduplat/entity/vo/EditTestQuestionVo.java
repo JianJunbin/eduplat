@@ -4,14 +4,14 @@ import lombok.Data;
 
 /**
  * @program: eduplat
- * @description:值对象
+ * @description: 值对象
  * @author: Jing
- * @create: 2019-11-27 17:23
+ * @create: 2019-12-06 09:03
  **/
 @Data
-public class TestQuestionVo {
+public class EditTestQuestionVo {
     private Long id;
     private Long test_id;
-    private Long[] questionSelected;
-//    private int isdelete;
+    private Long[] questionAdd;
+    private Long[] questionDelete;
 }

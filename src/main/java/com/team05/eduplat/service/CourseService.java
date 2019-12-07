@@ -6,6 +6,7 @@ import com.team05.eduplat.entity.po.CourseListPo;
 import com.team05.eduplat.entity.po.CourseOrderPo;
 import com.team05.eduplat.entity.po.CoursePo;
 import com.team05.eduplat.entity.vo.CourseListVo;
+import com.team05.eduplat.entity.vo.CourseNameVo;
 import com.team05.eduplat.entity.vo.CourseVo;
 import com.team05.eduplat.entity.vo.PageinfoVo;
 import com.team05.eduplat.repository.CourseDao;
@@ -160,4 +161,20 @@ public class CourseService {
         return ResultHelper.result(ResultEnum.SUCCESS);
     }
 
+    /**
+    * @Description: 获取当前用户id下的课程
+    * @Author: Jing
+    * @Date: 2019/11/29
+    */
+    public ResultMessage getCourse(PageinfoVo pageinfoVo){
+        Page<CoursePo> coursePos=courseDao.findByUserId(PageHelper.initPage(pageinfoVo),pageinfoVo.getUserId());
+        List<CourseNameVo> courseNameVos =new LinkedList<>();
+        coursePos.forEach(c->{
+            CourseNameVo courseNameVo =new CourseNameVo();
+            BeanUtils.copyProperties(c, courseNameVo);
+            courseNameVos.add(courseNameVo);
+        });
+        return ResultHelper.result(ResultEnum.SUCCESS)
+                .put("course", courseNameVos);
+    }
 }

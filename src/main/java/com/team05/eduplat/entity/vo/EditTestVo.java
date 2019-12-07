@@ -6,14 +6,11 @@ import lombok.Data;
  * @program: eduplat
  * @description: 值对象
  * @author: Jing
- * @create: 2019-12-04 09:19
+ * @create: 2019-12-06 09:39
  **/
 @Data
-public class CourseTestVo {
+public class EditTestVo {
     private Long id;
-    private Long course_id;
-    private String chapter;
-    private String section;
+    private Long test_id;
     private int question_num;
-    private int isdelete;
 }

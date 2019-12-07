@@ -15,55 +15,55 @@ public class CourseTestPo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "test_id")
-    private long id;
+    private Long id;
 
     @Column(name = "course_id")
-    private long course_id;
+    private Long course_id;
 
     @Column(name = "chapter")
-    private int chapter;
+    private Long chapter;
 
     @Column(name = "section")
-    private int section;
+    private Long section;
 
     @Column(name = "question_num")
     private int question_num;
 
     @Column(name = "user_id")
-    private long user_id;
+    private Long user_id;
 
     @Column(name = "isdelete")
     private int isdelete;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public long getCourse_id() {
+    public Long getCourse_id() {
         return course_id;
     }
 
-    public void setCourse_id(long course_id) {
+    public void setCourse_id(Long course_id) {
         this.course_id = course_id;
     }
 
-    public int getChapter() {
+    public Long getChapter() {
         return chapter;
     }
 
-    public void setChapter(int chapter) {
+    public void setChapter(Long chapter) {
         this.chapter = chapter;
     }
 
-    public int getSection() {
+    public Long getSection() {
         return section;
     }
 
-    public void setSection(int section) {
+    public void setSection(Long section) {
         this.section = section;
     }
 
@@ -75,11 +75,11 @@ public class CourseTestPo {
         this.question_num = question_num;
     }
 
-    public long getUser_id() {
+    public Long getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(long user_id) {
+    public void setUser_id(Long user_id) {
         this.user_id = user_id;
     }
 

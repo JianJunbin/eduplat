@@ -10,7 +10,7 @@ import lombok.Data;
  **/
 @Data
 public class QuestionVo {
-    private long id;
+    private Long id;
     private int type;
     private String content;
     private String option1;
@@ -22,7 +22,7 @@ public class QuestionVo {
     private String tag1;
     private String tag2;
     private String tag3;
-    private long user_id;
-    private long course_id;
+    private Long user_id;
+    private Long course_id;
     private int isdelete;
 }
