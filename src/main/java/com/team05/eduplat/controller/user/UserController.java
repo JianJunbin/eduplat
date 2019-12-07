@@ -50,6 +50,7 @@ public class UserController {
     @ApiOperation("用户登陆")
     @PostMapping("/loginUser")
     public ResultMessage loginUser(@RequestBody @Validated UserParam userParam) throws Exception {
+        System.out.print(userParam.getPassword()+"::"+userParam.getUsername());
         return userService.loginUser(userParam.getPassword(),userParam.getUsername());
     }
 

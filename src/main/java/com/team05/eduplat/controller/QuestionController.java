@@ -8,10 +8,12 @@ import com.team05.eduplat.utils.Result.ResultMessage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @program: eduplat
@@ -32,6 +34,7 @@ public class QuestionController {
             , BindingResult errors)throws Exception{
         ResultMessage resultMessage= ParamCheckUtil.checkParam(errors);
         if (resultMessage != null) return resultMessage;
+        System.out.print(pageinfoVo.getIndexPageNum());
         return questionService.ListQuestion(pageinfoVo);
     }
 
