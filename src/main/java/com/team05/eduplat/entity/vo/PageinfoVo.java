@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
  **/
 @Data
 public class PageinfoVo {
-        @NotNull(message = "用户id不为空")
         private Long userId;
         @NotNull(message = "分页单页条目数, 不得为null.")
         private Integer size;

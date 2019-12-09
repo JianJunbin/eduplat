@@ -104,4 +104,12 @@ public class CourseController {
         if (resultMessage != null) return resultMessage;
         return courseService.getCourse(pageinfoVo);
     }
+
+    @ApiOperation("用户id查课程")
+    @PostMapping("/getAllCourse")
+    public ResultMessage getAllCourse (@RequestBody @Validated PageinfoVo pageinfoVo, BindingResult errors) throws Exception {
+        ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
+        if (resultMessage != null) return resultMessage;
+        return courseService.findAll(pageinfoVo);
+    }
 }

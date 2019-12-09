@@ -177,4 +177,17 @@ public class CourseService {
         return ResultHelper.result(ResultEnum.SUCCESS)
                 .put("course", courseNameVos);
     }
+
+    public ResultMessage findAll(PageinfoVo pageinfoVo){
+        Page<CoursePo> coursePos;
+        coursePos = courseDao.findAll(PageHelper.initPage(pageinfoVo));
+        List<CourseVo> courseVos = new LinkedList<>();
+        coursePos.forEach(e->{
+            CourseVo courseVo = new CourseVo();
+            BeanUtils.copyProperties(e,courseVo);
+            courseVos.add(courseVo);
+        });
+        return ResultHelper.result(ResultEnum.SUCCESS)
+                .put("courseVos",courseVos);
+    }
 }
