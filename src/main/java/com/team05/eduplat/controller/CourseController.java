@@ -105,7 +105,7 @@ public class CourseController {
         return courseService.getCourse(pageinfoVo);
     }
 
-    @ApiOperation("用户id查课程")
+    @ApiOperation("首页查询所有课程")
     @PostMapping("/getAllCourse")
     public ResultMessage getAllCourse (@RequestBody @Validated PageinfoVo pageinfoVo, BindingResult errors) throws Exception {
         ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
