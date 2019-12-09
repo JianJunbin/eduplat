@@ -1,19 +1,16 @@
 package com.team05.eduplat.controller;
 
-import com.team05.eduplat.entity.po.CourseTestPo;
-import com.team05.eduplat.entity.vo.EditTestQuestionVo;
-import com.team05.eduplat.entity.vo.EditTestVo;
-import com.team05.eduplat.entity.vo.ShowTestVo;
-import com.team05.eduplat.entity.vo.TestQuestionVo;
+import com.team05.eduplat.entity.po.Question.CourseTestPo;
+import com.team05.eduplat.entity.po.Question.TestMarkPo;
+import com.team05.eduplat.entity.vo.Question.*;
 import com.team05.eduplat.service.CourseTestService;
+import com.team05.eduplat.service.TestMarkService;
 import com.team05.eduplat.service.TestQuestionService;
 import com.team05.eduplat.utils.Result.ParamCheckUtil;
-import com.team05.eduplat.utils.Result.ResultEnum;
 import com.team05.eduplat.utils.Result.ResultMessage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,6 +32,8 @@ public class TestController {
     CourseTestService courseTestService;
     @Autowired
     TestQuestionService testQuestionService;
+    @Autowired
+    TestMarkService testMarkService;
 
     @ApiOperation("添加试卷")
     @PostMapping("/add")
@@ -91,7 +90,7 @@ public class TestController {
         Long course_id = showTestVo.getCourse_id();
         Long chapter = showTestVo.getChapter();
         Long section = showTestVo.getSection();
-        return courseTestService.findTest(course_id,chapter,section);
+        return courseTestService.showTest(course_id,chapter,section);
     }
 
     @ApiOperation("查询试卷题目")
@@ -116,5 +115,21 @@ public class TestController {
         ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
         if (resultMessage != null)return resultMessage;
         return courseTestService.RecoverTest(test_id);
+    }
+
+    @ApiOperation("添加成绩")
+    @PostMapping("/addMark")
+    public ResultMessage addMark(@RequestBody TestMarkPo testMarkPo,BindingResult errors){
+        ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
+        if (resultMessage != null)return resultMessage;
+        return testMarkService.addMark(testMarkPo);
+    }
+
+    @ApiOperation("查询成绩")
+    @PostMapping("/findMark")
+    public ResultMessage findMark(@RequestBody MarkVo markVo, BindingResult errors){
+        ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
+        if (resultMessage != null)return resultMessage;
+        return testMarkService.findMark(markVo);
     }
 }

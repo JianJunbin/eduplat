@@ -6,7 +6,7 @@ import com.team05.eduplat.entity.po.CourseListPo;
 import com.team05.eduplat.entity.po.CourseOrderPo;
 import com.team05.eduplat.entity.po.CoursePo;
 import com.team05.eduplat.entity.vo.CourseListVo;
-import com.team05.eduplat.entity.vo.CourseNameVo;
+import com.team05.eduplat.entity.vo.Question.CourseNameVo;
 import com.team05.eduplat.entity.vo.CourseVo;
 import com.team05.eduplat.entity.vo.PageinfoVo;
 import com.team05.eduplat.repository.CourseDao;

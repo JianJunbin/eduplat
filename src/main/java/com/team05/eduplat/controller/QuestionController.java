@@ -1,6 +1,6 @@
 package com.team05.eduplat.controller;
 
-import com.team05.eduplat.entity.po.QuestionPo;
+import com.team05.eduplat.entity.po.Question.QuestionPo;
 import com.team05.eduplat.entity.vo.PageinfoVo;
 import com.team05.eduplat.service.QuestionService;
 import com.team05.eduplat.utils.Result.ParamCheckUtil;
@@ -8,7 +8,6 @@ import com.team05.eduplat.utils.Result.ResultMessage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
