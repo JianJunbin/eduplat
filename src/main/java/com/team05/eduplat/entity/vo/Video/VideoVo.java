@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 @Data
 public class VideoVo {
 
-
+    public int videoId;
     @NotNull(message = "名字不能为空")
     public String name;
     public String remark;
@@ -18,4 +18,5 @@ public class VideoVo {
     @NotNull(message = "名字不能为空")
     public String url;
     public int uid;
+    public boolean flag;
 }

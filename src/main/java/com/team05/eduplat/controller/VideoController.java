@@ -1,10 +1,13 @@
 package com.team05.eduplat.controller;
 
 import com.team05.eduplat.entity.vo.Video.VideoVo;
+import com.team05.eduplat.service.CourseService;
 import com.team05.eduplat.service.Video.VideoService;
+import com.team05.eduplat.utils.Result.ResultMessage;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +22,8 @@ import java.util.Date;
 public class VideoController {
     @Autowired
     VideoService videoService;
+    @Autowired
+    CourseService courseService;
     @Value("${prop.upload-folder}")
     String uploadFolder;
 
@@ -87,12 +92,22 @@ public class VideoController {
             vvo.url = url;
 //            vvo.setUid(0);
 //            vvo.setName("你这是在测试吗");
-            videoAdd(vvo);
+            VideoAdd(vvo);
         }
     }
 
-    public  void videoAdd(VideoVo vvo){
+    @ApiOperation("视频获取")
+    @GetMapping("get")
+    public ResultMessage VideoGet(int userId) throws Exception{
+       return videoService.findAll(userId);
+    }
+
+    @ApiOperation("视频修改/添加")
+    @PostMapping("update")
+    public  void VideoAdd(@RequestBody @Validated VideoVo vvo){
+        System.out.println(vvo);
         videoService.add(vvo);
         return;
     }
+
 }

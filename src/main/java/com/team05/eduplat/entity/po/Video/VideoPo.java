@@ -5,6 +5,13 @@ import javax.persistence.*;
 @Entity
 @Table(name = "video")
 public class VideoPo {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,13 +50,7 @@ public class VideoPo {
         this.flag = flag;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
