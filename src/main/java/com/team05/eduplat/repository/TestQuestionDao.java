@@ -1,6 +1,6 @@
 package com.team05.eduplat.repository;
 
-import com.team05.eduplat.entity.po.TestQuestionPo;
+import com.team05.eduplat.entity.po.Question.TestQuestionPo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

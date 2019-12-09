@@ -1,4 +1,4 @@
-package com.team05.eduplat.entity.po;
+package com.team05.eduplat.entity.po.Question;
 
 import javax.persistence.*;
 

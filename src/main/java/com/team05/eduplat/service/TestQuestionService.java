@@ -1,6 +1,6 @@
 package com.team05.eduplat.service;
 
-import com.team05.eduplat.entity.po.TestQuestionPo;
+import com.team05.eduplat.entity.po.Question.TestQuestionPo;
 import com.team05.eduplat.repository.TestQuestionDao;
 import com.team05.eduplat.utils.Result.ResultEnum;
 import com.team05.eduplat.utils.Result.ResultHelper;

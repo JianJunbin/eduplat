@@ -1,8 +1,6 @@
 package com.team05.eduplat.repository;
 
-import com.team05.eduplat.entity.po.CourseTestPo;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.team05.eduplat.entity.po.Question.CourseTestPo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,9 +13,6 @@ import java.util.List;
  * @Date: 2019/11/27
  */
 public interface CourseTestDao extends JpaRepository<CourseTestPo,Integer> {
-//    @Override
-//    Page<CourseTestPo> findAll(Pageable pageable);
-
 
     @Query(value = "select * from course_test where course_id=:course_id",nativeQuery = true)
     List<CourseTestPo> findAllByCourse_id(@Param(value = "course_id")Long course_id);

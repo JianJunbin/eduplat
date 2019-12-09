@@ -1,6 +1,6 @@
 package com.team05.eduplat.controller;
 
-import com.team05.eduplat.entity.po.QuestionPo;
+import com.team05.eduplat.entity.po.Question.QuestionPo;
 import com.team05.eduplat.entity.vo.PageinfoVo;
 import com.team05.eduplat.service.QuestionService;
 import com.team05.eduplat.utils.Result.ParamCheckUtil;

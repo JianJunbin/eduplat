@@ -1,4 +1,4 @@
-package com.team05.eduplat.entity.vo;
+package com.team05.eduplat.entity.vo.Question;
 
 import lombok.Data;
 

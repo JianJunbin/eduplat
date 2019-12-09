@@ -1,10 +1,10 @@
 package com.team05.eduplat.service;
 
-import com.team05.eduplat.entity.po.CourseTestPo;
-import com.team05.eduplat.entity.po.QuestionPo;
-import com.team05.eduplat.entity.vo.CourseTestVo;
-import com.team05.eduplat.entity.vo.EditTestVo;
-import com.team05.eduplat.entity.vo.QuestionVo;
+import com.team05.eduplat.entity.po.Question.CourseTestPo;
+import com.team05.eduplat.entity.po.Question.QuestionPo;
+import com.team05.eduplat.entity.vo.Question.CourseTestVo;
+import com.team05.eduplat.entity.vo.Question.EditTestVo;
+import com.team05.eduplat.entity.vo.Question.QuestionVo;
 import com.team05.eduplat.repository.CourseListDao;
 import com.team05.eduplat.repository.CourseTestDao;
 import com.team05.eduplat.repository.QuestionDao;
@@ -70,19 +70,24 @@ public class CourseTestService {
     * @Author: Jing
     * @Date: 2019/12/6
     */
-    public ResultMessage findTest(Long course_id, Long chapter, Long section){
-        CourseTestPo courseTestPo = courseTestDao.findTest(course_id,chapter,section);
-        String chapterName=courseListDao.getNodeName(course_id,chapter);
-        String sectionName=courseListDao.getNodeName(course_id,section);
-        CourseTestVo courseTestVo = new CourseTestVo();
-        courseTestVo.setId(courseTestPo.getId());
-        courseTestVo.setCourse_id(courseTestPo.getCourse_id());
-        courseTestVo.setChapter(chapterName);
-        courseTestVo.setSection(sectionName);
-        courseTestVo.setQuestion_num(courseTestPo.getQuestion_num());
-        courseTestVo.setIsdelete(courseTestPo.getIsdelete());
-        return ResultHelper.result(ResultEnum.SUCCESS)
-                .put("test",courseTestVo);
+    public ResultMessage showTest(Long course_id, Long chapter, Long section){
+        try{
+            CourseTestPo courseTestPo = courseTestDao.findTest(course_id,chapter,section);
+            String chapterName=courseListDao.getNodeName(course_id,chapter);
+            String sectionName=courseListDao.getNodeName(course_id,section);
+            CourseTestVo courseTestVo = new CourseTestVo();
+            courseTestVo.setId(courseTestPo.getId());
+            courseTestVo.setCourse_id(courseTestPo.getCourse_id());
+            courseTestVo.setChapter(chapterName);
+            courseTestVo.setSection(sectionName);
+            courseTestVo.setQuestion_num(courseTestPo.getQuestion_num());
+            courseTestVo.setIsdelete(courseTestPo.getIsdelete());
+            return ResultHelper.result(ResultEnum.SUCCESS)
+                    .put("test",courseTestVo);
+        }catch (Exception e){
+            return ResultHelper.result(ResultEnum.SUCCESS)
+                    .put("test",0);
+        }
     }
 
     /**
