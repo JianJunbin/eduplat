@@ -12,6 +12,7 @@ public class ResultHelper {
     public ResultHelper() {
     }
 
+
     public static ResultMessage result(ResultInfo result, Map<String, Object> data) {
         ResultMessage rs = new ResultMessage();
         rs.setCode(result.getCode());
@@ -28,6 +29,16 @@ public class ResultHelper {
     }
 
     public static ResultMessage result(ResultInfo resultInfo) {
-        return result(resultInfo, (Map)null);
+        return result(resultInfo, null);
     }
+
+    public static ResultMessage ok() {
+        return result(ResultEnum.SUCCESS);
+    }
+
+    public static ResultMessage bad() {
+        return result(ResultEnum.PARAM_ERROR);
+    }
+
+
 }

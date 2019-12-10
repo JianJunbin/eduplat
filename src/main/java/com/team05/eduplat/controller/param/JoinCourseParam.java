@@ -1,30 +1,23 @@
 package com.team05.eduplat.controller.param;
 
-import com.team05.eduplat.entity.vo.CourseListVo;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import net.sf.json.JSONArray;
 
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 /**
  * @program: EduPlat
  * @description: TODO
  * @author: jian'jun'bin
- * @Date 2019-11-21 14:39
+ * @Date 2019-12-10 9:07
  **/
 @Data
-public class NewListParam {
+public class JoinCourseParam {
+    @ApiModelProperty("用户id")
+    @NotNull(message = "用户id不能为空")
+    Long userId;
 
     @ApiModelProperty("课程id")
     @NotNull(message = "课程id不能为空")
     Long courseId;
-
-    @ApiModelProperty("课程目录")
-    @NotNull(message = "课程目录不能为空")
-    JSONArray jsonArray;
-
-    List<CourseListVo> courseListVos;
-
 }

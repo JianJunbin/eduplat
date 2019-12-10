@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @Date 2019-11-25 21:33
  **/
 public interface CourseDao extends JpaRepository<CoursePo,Integer> {
+
     Page<CoursePo> findByUserId(Pageable pageable,Long userId);
 
     @Modifying

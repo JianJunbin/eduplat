@@ -1,5 +1,6 @@
 package com.team05.eduplat.controller;
 
+import com.team05.eduplat.controller.param.JoinCourseParam;
 import com.team05.eduplat.controller.param.NewListParam;
 import com.team05.eduplat.controller.param.OrderParam;
 import com.team05.eduplat.entity.vo.CourseVo;
@@ -32,7 +33,7 @@ public class CourseController {
 
     @ApiOperation("添加课程")
     @PostMapping("/createCourse")
-    public ResultMessage addCourse(@RequestBody @Validated CourseVo courseVo,BindingResult errors) throws Exception{
+    public ResultMessage addCourse(@RequestBody @Validated CourseVo courseVo,BindingResult errors) {
         ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
         if (resultMessage != null) return resultMessage;
         return courseService.createCourse(courseVo);
@@ -40,7 +41,7 @@ public class CourseController {
 
     @ApiOperation("添加课程目录")
     @PostMapping("/createList")
-    public ResultMessage addList(@RequestBody @Validated NewListParam newListParam, BindingResult errors) throws Exception {
+    public ResultMessage addList(@RequestBody @Validated NewListParam newListParam, BindingResult errors) {
         ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
         if (resultMessage != null) return resultMessage;
         return courseService.createList(newListParam);
@@ -48,7 +49,7 @@ public class CourseController {
 
     @ApiOperation("分页查询课程")
     @PostMapping("/pageCourse")
-    public ResultMessage pageCourse(@RequestBody @Validated PageinfoVo pageinfoVo,BindingResult errors) throws Exception{
+    public ResultMessage pageCourse(@RequestBody @Validated PageinfoVo pageinfoVo,BindingResult errors) {
         ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
         if(resultMessage != null) return resultMessage;
         return  courseService.pageCourse(pageinfoVo);
@@ -56,7 +57,7 @@ public class CourseController {
 
     @ApiOperation("学生在学课程")
     @PostMapping("/onCourse")
-    public ResultMessage onCourse(@RequestBody @Validated OrderParam orderParam,BindingResult errors) throws Exception{
+    public ResultMessage onCourse(@RequestBody @Validated OrderParam orderParam,BindingResult errors) {
         ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
         if (resultMessage != null) return resultMessage;
         return courseService.findLearningCourse(orderParam);
@@ -64,7 +65,7 @@ public class CourseController {
 
     @ApiOperation("根据课程id找课程")
     @PostMapping("/courseById")
-    public ResultMessage courseById(@RequestBody @Validated Long courseId, BindingResult errors)throws Exception{
+    public ResultMessage courseById(@RequestBody @Validated Long courseId, BindingResult errors) {
         ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
         if (resultMessage != null) return resultMessage;
         return courseService.findCourseById(courseId);
@@ -111,5 +112,13 @@ public class CourseController {
         ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
         if (resultMessage != null) return resultMessage;
         return courseService.findAll(pageinfoVo);
+    }
+
+    @ApiOperation("加入课程")
+    @PostMapping("/joinCourse")
+    public ResultMessage join (@RequestBody @Validated JoinCourseParam joinCourseParam, BindingResult errors){
+        ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
+        if (resultMessage != null) return resultMessage;
+        return courseService.joinCourse(joinCourseParam.getUserId(),joinCourseParam.getCourseId());
     }
 }
