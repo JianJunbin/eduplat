@@ -1,4 +1,4 @@
-package com.team05.eduplat.service;
+package com.team05.eduplat.service.Question;
 
 import com.team05.eduplat.entity.po.Question.CourseTestPo;
 import com.team05.eduplat.entity.po.Question.QuestionPo;
@@ -6,9 +6,9 @@ import com.team05.eduplat.entity.vo.Question.CourseTestVo;
 import com.team05.eduplat.entity.vo.Question.EditTestVo;
 import com.team05.eduplat.entity.vo.Question.QuestionVo;
 import com.team05.eduplat.repository.CourseListDao;
-import com.team05.eduplat.repository.CourseTestDao;
-import com.team05.eduplat.repository.QuestionDao;
-import com.team05.eduplat.repository.TestQuestionDao;
+import com.team05.eduplat.repository.Question.CourseTestDao;
+import com.team05.eduplat.repository.Question.QuestionDao;
+import com.team05.eduplat.repository.Question.TestQuestionDao;
 import com.team05.eduplat.utils.Result.ResultEnum;
 import com.team05.eduplat.utils.Result.ResultHelper;
 import com.team05.eduplat.utils.Result.ResultMessage;
@@ -63,6 +63,20 @@ public class CourseTestService {
         return ResultHelper.result(ResultEnum.SUCCESS)
                 .put("tests",courseTestVos);
     }
+
+    public ResultMessage findTest(Long course_id, Long chapter, Long section){
+        Long test_id = Long.valueOf(0);
+        try{
+            CourseTestPo courseTestPo = courseTestDao.findTest(course_id,chapter,section);
+            test_id = courseTestPo.getId();
+            return ResultHelper.result(ResultEnum.SUCCESS)
+                    .put("test_id",test_id);
+        }catch(Exception e){
+            return ResultHelper.result(ResultEnum.SUCCESS)
+                    .put("test_id",test_id);
+        }
+    }
+
     /**
     * @Description:  查找指定章节视频下的试卷id
     * @Param: 传入课程id,章,节

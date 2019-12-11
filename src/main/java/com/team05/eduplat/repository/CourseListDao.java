@@ -22,7 +22,10 @@ public interface CourseListDao extends JpaRepository<CourseListPo,Integer> {
     @Transactional
     void deleteAllByCourseId(Long courseId);
 
+//获取章节id对于name
     @Query(value = "select node_name from course_list where course_id=:course_id and node_id=:node_id",nativeQuery = true)
     String getNodeName(@Param(value = "course_id")Long course_id, @Param(value = "node_id")Long node_id);
-
+//查询课程节数
+    @Query(value = "select count(*) from course_list where course_id=:course_id and pid <> 0",nativeQuery = true)
+    int getSectionNum(@Param(value = "course_id")Long course_id);
 }

@@ -1,9 +1,9 @@
-package com.team05.eduplat.service;
+package com.team05.eduplat.service.Question;
 
 import com.team05.eduplat.entity.po.Question.QuestionPo;
 import com.team05.eduplat.entity.vo.PageinfoVo;
 import com.team05.eduplat.entity.vo.Question.QuestionVo;
-import com.team05.eduplat.repository.QuestionDao;
+import com.team05.eduplat.repository.Question.QuestionDao;
 import com.team05.eduplat.utils.PageHelper;
 import com.team05.eduplat.utils.Result.ResultEnum;
 import com.team05.eduplat.utils.Result.ResultHelper;
