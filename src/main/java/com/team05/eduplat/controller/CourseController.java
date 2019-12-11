@@ -119,6 +119,6 @@ public class CourseController {
     public ResultMessage join (@RequestBody @Validated JoinCourseParam joinCourseParam, BindingResult errors){
         ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
         if (resultMessage != null) return resultMessage;
-        return courseService.joinCourse(joinCourseParam.getUserId(),joinCourseParam.getCourseId());
+        return courseService.joinCourse(joinCourseParam);
     }
 }
