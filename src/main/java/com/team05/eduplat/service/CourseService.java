@@ -1,11 +1,13 @@
 package com.team05.eduplat.service;
 
+import com.team05.eduplat.controller.param.JoinCourseParam;
 import com.team05.eduplat.controller.param.NewListParam;
 import com.team05.eduplat.controller.param.OrderParam;
 import com.team05.eduplat.entity.po.CourseListPo;
 import com.team05.eduplat.entity.po.CourseOrderPo;
 import com.team05.eduplat.entity.po.CoursePo;
 import com.team05.eduplat.entity.vo.CourseListVo;
+import com.team05.eduplat.entity.vo.CourseOrderVo;
 import com.team05.eduplat.entity.vo.Question.CourseNameVo;
 import com.team05.eduplat.entity.vo.CourseVo;
 import com.team05.eduplat.entity.vo.PageinfoVo;
@@ -94,15 +96,16 @@ public class CourseService {
         int param_status = orderParam.getStatus();
         List<CourseOrderPo> courseOrderPos;
         courseOrderPos = courseOrderDao.findByUserIdAndStatus(param_id, param_status);
-        List<CourseVo> courseVos = new LinkedList<>();
+        List<CourseOrderVo> courseOrderVos = new LinkedList<>();
         courseOrderPos.forEach(e -> {
             CoursePo coursePo = courseDao.findByCourseId(e.getCourseId());
-            CourseVo courseVo = new CourseVo();
-            BeanUtils.copyProperties(coursePo, courseVo);
-            courseVos.add(courseVo);
+            CourseOrderVo courseOrderVo = new CourseOrderVo();
+            BeanUtils.copyProperties(coursePo, courseOrderVo);
+            courseOrderVo.setOrderId(e.getOrderId());
+            courseOrderVos.add(courseOrderVo);
         });
         return ResultHelper.result(ResultEnum.SUCCESS)
-                .put("courseVos", courseVos);
+                .put("courseVos", courseOrderVos);
     }
 
     /*根据课程id查找课程*/
@@ -192,10 +195,9 @@ public class CourseService {
                 .put("courseVos", courseVos);
     }
 
-    public ResultMessage joinCourse(Long userId,Long courseId){
+    public ResultMessage joinCourse(JoinCourseParam joinCourseParam){
         CourseOrderPo courseOrderPo = new CourseOrderPo();
-        courseOrderPo.setCourseId(courseId);
-        courseOrderPo.setUserId(userId);
+        BeanUtils.copyProperties(joinCourseParam,courseOrderPo);
         courseOrderDao.save(courseOrderPo);
         return ResultHelper.ok();
     }

@@ -13,6 +13,9 @@ import javax.validation.constraints.NotNull;
  **/
 @Data
 public class JoinCourseParam {
+    @ApiModelProperty("orderId")
+    Long orderId;
+
     @ApiModelProperty("用户id")
     @NotNull(message = "用户id不能为空")
     Long userId;
@@ -20,4 +23,7 @@ public class JoinCourseParam {
     @ApiModelProperty("课程id")
     @NotNull(message = "课程id不能为空")
     Long courseId;
+
+    @ApiModelProperty("订单状态")
+    int status;
 }
