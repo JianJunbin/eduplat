@@ -1,11 +1,13 @@
 package com.team05.eduplat.controller;
 
 import com.team05.eduplat.entity.po.Question.CourseTestPo;
+import com.team05.eduplat.entity.po.Question.ScoreRulePo;
 import com.team05.eduplat.entity.po.Question.TestMarkPo;
 import com.team05.eduplat.entity.vo.Question.*;
-import com.team05.eduplat.service.CourseTestService;
-import com.team05.eduplat.service.TestMarkService;
-import com.team05.eduplat.service.TestQuestionService;
+import com.team05.eduplat.service.Question.CourseTestService;
+import com.team05.eduplat.service.Question.ScoreRuleService;
+import com.team05.eduplat.service.Question.TestMarkService;
+import com.team05.eduplat.service.Question.TestQuestionService;
 import com.team05.eduplat.utils.Result.ParamCheckUtil;
 import com.team05.eduplat.utils.Result.ResultMessage;
 import io.swagger.annotations.Api;
@@ -34,6 +36,8 @@ public class TestController {
     TestQuestionService testQuestionService;
     @Autowired
     TestMarkService testMarkService;
+    @Autowired
+    ScoreRuleService scoreRuleService;
 
     @ApiOperation("添加试卷")
     @PostMapping("/add")
@@ -80,6 +84,17 @@ public class TestController {
         ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
         if (resultMessage != null)return resultMessage;
         return courseTestService.ListTest(course_id);
+    }
+
+    @ApiOperation("查找指定课程章节是否存在试卷")
+    @PostMapping("/findTest")
+    public ResultMessage findTest(@RequestBody ShowTestVo showTestVo, BindingResult errors){
+        ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
+        if (resultMessage !=null)return  resultMessage;
+        Long course_id = showTestVo.getCourse_id();
+        Long chapter = showTestVo.getChapter();
+        Long section = showTestVo.getSection();
+        return courseTestService.findTest(course_id,chapter,section);
     }
 
     @ApiOperation("显示指定章节的试卷")
@@ -131,5 +146,30 @@ public class TestController {
         ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
         if (resultMessage != null)return resultMessage;
         return testMarkService.findMark(markVo);
+    }
+
+    @ApiOperation("设置规则")
+    @PostMapping("/setRule")
+    public ResultMessage setRule(@RequestBody ScoreRulePo scoreRulePo,BindingResult errors){
+        ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
+        if (resultMessage != null)return resultMessage;
+        return scoreRuleService.setRule(scoreRulePo);
+    }
+
+    @ApiOperation("计算总分")
+    @PostMapping("/totalScore")
+    public ResultMessage totalScore(@RequestBody totalScoreVo totalScoreVo,BindingResult errors){
+        ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
+        if (resultMessage != null)return resultMessage;
+        Long user_id = totalScoreVo.getUser_id();
+        Long course_id = totalScoreVo.getCourse_id();
+        Long chapter = totalScoreVo.getChapter();
+        int mark = totalScoreVo.getMark();                                  //本次试卷得分
+        int video_proportion = scoreRuleService.getRule(course_id,chapter); //获取该章节打分规则中视频占分比
+        int question_proportion = 100 - video_proportion;                   //题目占分比 = 100 - 视频占分比
+        int num = scoreRuleService.getSectionNum(course_id);                //获取课程节数
+        int totalScore = (video_proportion+question_proportion*mark/100)/num;//课程分数计算
+        System.out.println("本次学习获得课程分数："+totalScore);
+        return scoreRuleService.setCourseMark(user_id,course_id,totalScore);
     }
 }

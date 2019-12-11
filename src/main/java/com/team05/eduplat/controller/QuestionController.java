@@ -2,7 +2,7 @@ package com.team05.eduplat.controller;
 
 import com.team05.eduplat.entity.po.Question.QuestionPo;
 import com.team05.eduplat.entity.vo.PageinfoVo;
-import com.team05.eduplat.service.QuestionService;
+import com.team05.eduplat.service.Question.QuestionService;
 import com.team05.eduplat.utils.Result.ParamCheckUtil;
 import com.team05.eduplat.utils.Result.ResultMessage;
 import io.swagger.annotations.Api;
@@ -34,7 +34,6 @@ public class QuestionController {
             , BindingResult errors)throws Exception{
         ResultMessage resultMessage = ParamCheckUtil.checkParam(errors);
         if (resultMessage != null) return resultMessage;
-        System.out.print(pageinfoVo.getIndexPageNum());
         return questionService.ListQuestion(pageinfoVo);
     }
 
