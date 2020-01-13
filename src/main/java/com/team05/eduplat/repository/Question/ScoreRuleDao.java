@@ -9,4 +9,11 @@ public interface ScoreRuleDao extends JpaRepository<ScoreRulePo,Integer> {
 //    查询课程规则
     @Query(value = "select * from score_rule where course_id=:course_id and  chapter=:chapter",nativeQuery = true)
     ScoreRulePo getCourseRule(@Param(value = "course_id")Long course_id,@Param(value = "chapter")Long chapter);
+
+//    ScoreRulePo findByCourse_idAndChapter(Long course_id,Long chapter);
+
+//    @Query("select * from ScoreRulePo where course_id=:course_id and  chapter=:chapter")
+//    ScoreRulePo findAByCourse_idAndChapter2(Long course_id,Long chapter);
+
+
 }
